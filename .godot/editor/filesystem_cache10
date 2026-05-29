@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1780027572
+::res://::1780032082
 godot_launch.log::TextFile::-1::1780025965::0::1::::<><><>0<>0<><>::
 plan.md::TextFile::-1::1780025334::0::1::::<><><>0<>0<><>::
 ::res://export_templates/::1780024062
@@ -169,7 +169,7 @@ godot.log::TextFile::-1::1780025743::0::1::::<><><>0<>0<><>::
 player.tscn::PackedScene::-1::1780027462::0::1::::<><><>0<>0<><>::res://res/actors/player/player_controller.gd<>res://res/actors/player/player_camera_controller.gd<>res://res/actors/player/player_interaction_component.gd<>res://res/actors/player/player_combat_bridge.gd
 player_camera_controller.gd::GDScript::1577216702341208475::1780024648::0::1::::<>Node3D<><>0<>0<><>::
 player_combat_bridge.gd::GDScript::5751094363641632506::1780027462::0::1::::<>Node<><>0<>0<><>::
-player_controller.gd::GDScript::7805827194611797002::1780027554::0::1::::<>CharacterBody3D<><>0<>0<><>::
+player_controller.gd::GDScript::7805827194611797002::1780032058::0::1::::<>CharacterBody3D<><>0<>0<><>::
 player_interaction_component.gd::GDScript::4414442551475251457::1780024648::0::1::::<>RayCast3D<><>0<>0<><>::
 player_locomotion_state.gd::GDScript::1842183006152477077::1780027281::0::1::::PlayerLocomotionState<>RefCounted<><>0<>0<><>::
 player_movement_profile.gd::GDScript::5848324319581322660::1780026961::0::1::::PlayerMovementProfile<>Resource<><>0<>0<><>::

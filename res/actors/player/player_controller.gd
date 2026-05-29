@@ -18,6 +18,10 @@ enum LocomotionState {
 @export var ground_deceleration := 24.0
 @export var air_acceleration := 8.0
 
+@export_group("Air")
+@export var max_air_jumps := 1
+@export var air_jump_velocity := 5.2
+
 @export_group("Crouch")
 @export var standing_capsule_height := 1.8
 @export var crouched_capsule_height := 1.2
@@ -62,6 +66,7 @@ var _slide_direction := Vector3.ZERO
 var _mantle_time_left := 0.0
 var _mantle_start_position := Vector3.ZERO
 var _mantle_target_position := Vector3.ZERO
+var _air_jumps_left := 0
 
 
 func _ready() -> void:
@@ -72,8 +77,9 @@ func _ready() -> void:
 	camera_controller.set("crouched_eye_height", crouched_eye_height)
 	mantle_probe_lower.enabled = true
 	mantle_probe_upper.enabled = true
+	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD move | Shift sprint | Space jump | Ctrl crouch/slide | Jump into ledges to mantle | Esc mouse"
+	hint_label.text = "WASD move | Shift sprint | Space jump/double jump | Ctrl crouch/slide | Jump into ledges to mantle | Esc mouse"
 	_update_debug_label()
 
 
@@ -106,9 +112,16 @@ func _physics_process(delta: float) -> void:
 	var on_floor := is_on_floor()
 	var move_input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
-	if on_floor and Input.is_action_just_pressed("jump"):
-		_end_slide()
-		velocity.y = jump_velocity
+	if on_floor:
+		_air_jumps_left = max_air_jumps
+
+	if Input.is_action_just_pressed("jump"):
+		if on_floor:
+			_end_slide()
+			velocity.y = jump_velocity
+		elif _air_jumps_left > 0:
+			_air_jumps_left -= 1
+			velocity.y = air_jump_velocity
 
 	var sprint_requested := _can_sprint(move_input, on_floor)
 	if _can_start_slide(sprint_requested) and Input.is_action_just_pressed("crouch"):
@@ -320,9 +333,40 @@ func _begin_mantle() -> void:
 	forward.y = 0.0
 	forward = forward.normalized()
 
-	var target := global_position + Vector3.UP * mantle_max_height + forward * mantle_forward_distance
-	if test_move(global_transform, target - global_position):
+	var hit_point := mantle_probe_lower.get_collision_point()
+	var space_state := get_world_3d().direct_space_state
+	var ray_from := hit_point + forward * mantle_forward_distance + Vector3.UP * (mantle_max_height + 0.2)
+	var ray_to := ray_from + Vector3.DOWN * (mantle_max_height + mantle_min_height + 2.0)
+	var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+	query.exclude = [self]
+
+	var hit := space_state.intersect_ray(query)
+	if hit.is_empty():
 		return
+
+	var top_point: Vector3 = hit["position"]
+	var base_target := top_point + Vector3.UP * (standing_capsule_height * 0.5 + 0.05) + forward * 0.15
+	var target := base_target
+
+	if test_move(global_transform, target - global_position):
+		var found_clear_target := false
+		for i in range(1, 8):
+			var candidate := base_target - forward * (0.15 * float(i))
+			if not test_move(global_transform, candidate - global_position):
+				target = candidate
+				found_clear_target = true
+				break
+
+		if not found_clear_target:
+			for i in range(1, 4):
+				var candidate_up := base_target + Vector3.UP * (0.1 * float(i))
+				if not test_move(global_transform, candidate_up - global_position):
+					target = candidate_up
+					found_clear_target = true
+					break
+
+		if not found_clear_target:
+			return
 
 	_state = LocomotionState.MANTLING
 	velocity = Vector3.ZERO
