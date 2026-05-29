@@ -1,0 +1,22 @@
+# Godot-generated project data (cache/import/editor state)
+/.godot/
+
+# Local user/editor runtime data
+/.godot_user/
+
+# Local diagnostic and backup artifacts
+/godot_launch.log
+/godot_state_backup_*/
+
+# Godot tooling folders that can appear locally
+/export_templates/
+/feature_profiles/
+/script_templates/
+/text_editor_themes/
+
+# General logs
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
