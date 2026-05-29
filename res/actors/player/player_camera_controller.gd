@@ -1,4 +1,5 @@
 extends Node3D
+class_name PlayerCameraController
 
 @export var mouse_sensitivity := 0.12
 @export var pitch_min := -80.0

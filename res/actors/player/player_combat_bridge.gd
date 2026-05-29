@@ -1,4 +1,5 @@
 extends Node
+class_name PlayerCombatBridge
 
 enum WeaponReadiness {
 	READY,

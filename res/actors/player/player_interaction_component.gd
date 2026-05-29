@@ -1,4 +1,5 @@
 extends RayCast3D
+class_name PlayerInteractionComponent
 
 @export var interaction_distance := 2.6
 

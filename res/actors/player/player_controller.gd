@@ -39,9 +39,9 @@ var slide_cooldown: float
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var body_mesh: MeshInstance3D = $BodyMesh
 @onready var head_pivot: Node3D = $HeadPivot
-@onready var camera_controller: Node3D = $HeadPivot
-@onready var interaction_component: RayCast3D = $HeadPivot/InteractionRayCast3D
-@onready var combat_bridge: Node = $CombatBridge
+@onready var camera_controller: PlayerCameraController = $HeadPivot
+@onready var interaction_component: PlayerInteractionComponent = $HeadPivot/InteractionRayCast3D
+@onready var combat_bridge: PlayerCombatBridge = $CombatBridge
 @onready var mantle_probe_lower: RayCast3D = $MantleProbeLower
 @onready var mantle_probe_upper: RayCast3D = $MantleProbeUpper
 @onready var state_label: Label = $UI/StateLabel
@@ -67,8 +67,8 @@ func _ready() -> void:
 	_gravity = float(ProjectSettings.get_setting("physics/3d/default_gravity", 9.8))
 	_apply_movement_profile()
 	_apply_crouch_pose(0.0)
-	camera_controller.set("standing_eye_height", standing_eye_height)
-	camera_controller.set("crouched_eye_height", crouched_eye_height)
+	camera_controller.standing_eye_height = standing_eye_height
+	camera_controller.crouched_eye_height = crouched_eye_height
 	mantle_probe_lower.enabled = true
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
@@ -120,13 +120,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 
-	camera_controller.call("handle_input", event, self)
+	camera_controller.handle_input(event, self)
 
 
 func _physics_process(delta: float) -> void:
 	if _state == LocomotionState.MANTLING:
 		_update_mantle(delta)
-		camera_controller.call("update_state_effects", false, false, delta)
+		camera_controller.update_state_effects(false, false, delta)
 		_update_debug_label()
 		return
 
@@ -153,15 +153,14 @@ func _physics_process(delta: float) -> void:
 
 	if _can_start_mantle(move_input, on_floor):
 		_begin_mantle()
-		camera_controller.call("update_state_effects", false, false, delta)
+		camera_controller.update_state_effects(false, false, delta)
 		_update_debug_label()
 		return
 
 	_update_slide(delta)
 	_update_crouch_state(delta)
 	_update_horizontal_velocity(move_input, delta)
-	camera_controller.call(
-		"update_state_effects",
+	camera_controller.update_state_effects(
 		_state == LocomotionState.SPRINTING,
 		_state == LocomotionState.SLIDING,
 		delta
@@ -244,7 +243,7 @@ func _update_crouch_state(delta: float) -> void:
 	var target_alpha := 1.0 if _is_crouching else 0.0
 	_crouch_alpha = move_toward(_crouch_alpha, target_alpha, crouch_blend_speed * delta)
 	_apply_crouch_pose(_crouch_alpha)
-	camera_controller.call("update_eye_height", _crouch_alpha, delta)
+	camera_controller.update_eye_height(_crouch_alpha, delta)
 
 
 func _apply_crouch_pose(alpha: float) -> void:
@@ -418,13 +417,13 @@ func _horizontal_speed() -> float:
 
 func _update_debug_label() -> void:
 	var name := _state_name()
-	combat_bridge.call("update_from_locomotion_state", StringName(name))
+	combat_bridge.update_from_locomotion_state(StringName(name))
 	state_label.text = "State: %s | Speed: %.2f | Weapon: %s" % [
 		name,
 		_horizontal_speed(),
-		combat_bridge.call("readiness_name")
+		combat_bridge.readiness_name()
 	]
-	interaction_label.text = interaction_component.call("get_interaction_hint")
+	interaction_label.text = interaction_component.get_interaction_hint()
 
 
 func _state_name() -> String:
