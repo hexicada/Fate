@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://res/actors/player/player_controller.gd" id="1_kkxib"]
+[ext_resource type="Script" path="res://res/actors/player/player_camera_controller.gd" id="2_3qoh2"]
+[ext_resource type="Script" path="res://res/actors/player/player_interaction_component.gd" id="3_kg584"]
+[ext_resource type="Script" path="res://res/actors/player/player_combat_bridge.gd" id="4_h6s3b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v2rf"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x5jlt"]
+radius = 0.35
+mid_height = 1.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm2ki"]
+albedo_color = Color(0.227451, 0.356863, 0.619608, 1)
+roughness = 0.72
+
+[node name="Player" type="CharacterBody3D"]
+floor_snap_length = 0.25
+script = ExtResource("1_kkxib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_2v2rf")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_x5jlt")
+material_override = SubResource("StandardMaterial3D_jm2ki")
+
+[node name="HeadPivot" type="Node3D" parent="."]
+position = Vector3(0, 1.6, 0)
+script = ExtResource("2_3qoh2")
+
+[node name="Camera3D" type="Camera3D" parent="HeadPivot"]
+current = true
+near = 0.05
+
+[node name="InteractionRayCast3D" type="RayCast3D" parent="HeadPivot"]
+target_position = Vector3(0, 0, -2.6)
+script = ExtResource("3_kg584")
+
+[node name="WeaponPivot" type="Node3D" parent="HeadPivot"]
+position = Vector3(0.24, -0.22, -0.35)
+
+[node name="CombatBridge" type="Node" parent="."]
+script = ExtResource("4_h6s3b")
+
+[node name="MantleProbeLower" type="RayCast3D" parent="."]
+position = Vector3(0, 0.9, 0)
+target_position = Vector3(0, 0, -0.8)
+
+[node name="MantleProbeUpper" type="RayCast3D" parent="."]
+position = Vector3(0, 1.6, 0)
+target_position = Vector3(0, 0, -0.8)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StateLabel" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 480.0
+offset_bottom = 56.0
+text = "State: Standing"
+
+[node name="HintLabel" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 42.0
+offset_right = 980.0
+offset_bottom = 86.0
+text = "WASD move | Shift sprint | Space jump | Ctrl crouch/slide | Esc mouse"
+
+[node name="InteractionLabel" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 68.0
+offset_right = 560.0
+offset_bottom = 110.0

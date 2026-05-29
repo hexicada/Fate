@@ -1,0 +1,191 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1780027572
+godot_launch.log::TextFile::-1::1780025965::0::1::::<><><>0<>0<><>::
+plan.md::TextFile::-1::1780025334::0::1::::<><><>0<>0<><>::
+::res://export_templates/::1780024062
+::res://feature_profiles/::1780024062
+::res://godot_state_backup_2026-29-05_153848/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/logs/::1780025928
+godot2026-05-29T15.29.05.log::TextFile::-1::1780025345::0::1::::<><><>0<>0<><>::
+godot2026-05-29T15.32.50.log::TextFile::-1::1780025570::0::1::::<><><>0<>0<><>::
+godot2026-05-29T15.34.22.log::TextFile::-1::1780025662::0::1::::<><><>0<>0<><>::
+godot2026-05-29T15.35.42.log::TextFile::-1::1780025742::0::1::::<><><>0<>0<><>::
+godot.log::TextFile::-1::1780025743::0::1::::<><><>0<>0<><>::
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/objectdb_snapshots/::1780024983
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BestFitNormalShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BestFitNormalShaderRD/ff55ede486711a617cfa6eca8952f824e1de5c6fd727c4514cd603e8e7c9264e/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BlitShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BlitShaderRD/cff12a2b56a5c7d70f6de186c786c80ec84b1844045fdaf13152862c6a82baf6/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BokehDofShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/BokehDofShaderRD/3d294ab0ec5302046ff36ecad7f72d70d1c4b3efbc3ca1bb29fe6a80be9abb65/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasOcclusionShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasOcclusionShaderRD/e397c50e1a9e03519ccb486acfdaddf8be9986511a5738dd0fa77e62980f0ad0/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasSdfShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasSdfShaderRD/f5163131ffbf6578b3e403ae4a2e93b16c3b4d4f74b7d313965240c9159ca4a3/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CanvasShaderRD/f30a5b440b1341c6eaa19af108108f7adb605232e31fd6aeac74e4825e07ec28/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterDebugShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterDebugShaderRD/2775e502fff54bad7c5a36ee96cb93f9bb26a0835936a36809e0142a020d1da5/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterRenderShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterRenderShaderRD/d7d33a009d89531a62355652a94a4bbbcb6ecafd4849629a6a81ebc41fb55f82/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterStoreShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ClusterStoreShaderRD/04f77ac6fc3ac39e10dba3d8b90afbac54f16ae6134a60264841ff0154dd1be9/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CopyShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CopyShaderRD/bef3ebc581956c1e4cad1b19a4c57b168d4fd3a373a0481f33e26003ca1fa6c6/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CopyToFbShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CopyToFbShaderRD/d2ff28d6e27943750d2e72da5da60d486f9b37ab66241467d62296b893eb4cd0/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CubeToDpShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CubeToDpShaderRD/a1c0c9b7619044d7ba83959f645735ee8e1d34ad23904a6ac0af8e55d7ba00db/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CubeToOctmapShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/CubeToOctmapShaderRD/c8b61d04732bfd2b54191babf0cd12bfae13c795c34c47b484abdf9f06f00205/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2AccumulatePassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2AccumulatePassShaderRD/59eaf5aa5dab2091f9920fd2cd38d17b2ebcab91baa70d1238410844bbecbb5b/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2AutogenReactivePassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2AutogenReactivePassShaderRD/ec5d678440f2691e5fbe9f077b20a0af3ac3b7c57459658136fe928187f8dc45/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2ComputeLuminancePyramidPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2ComputeLuminancePyramidPassShaderRD/fcbae19c9e34620536c2ff16b1c22459d168d05f8f04ee0408268eac446353db/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2DepthClipPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2DepthClipPassShaderRD/6b9a59f55a7acc18aef6c6065544923fc586af3364f631a64dd6335e5a1f5085/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2LockPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2LockPassShaderRD/6ba09946c77cf589f8525522562375ceabd82a1bd0e28cdaa6da7d5afe48777a/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2RcasPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2RcasPassShaderRD/b2b9c2dbcf61b422fa22aadbfefd75dcf73120ffcc9b6d6b3ae251a1c3b091a7/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2ReconstructPreviousDepthPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2ReconstructPreviousDepthPassShaderRD/696549826dfa212243f6aaca43553fe1b4e35f3b0f848a30cac71af75c979104/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2TcrAutogenPassShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/Fsr2TcrAutogenPassShaderRD/1ddf023abd1d246190d528e8d06b38da222148c759ca42852bd25aa4d9dc48cb/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/FsrUpscaleShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/FsrUpscaleShaderRD/d659c02701a99861f3054fa8c67cabb79f0491aa3388020f008051107cf1fec5/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/GiShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/GiShaderRD/0a1109506856e7902e872dda83faa67adac822d90e694417c64c101b2b904810/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/GiShaderRD/9e900b11fb1fd59f00f233f459e572b3bff5d0c8f622f0ddf9ee855771977bab/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/IntegrateDfgShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/IntegrateDfgShaderRD/6d20d114a76402f30530dc6983c20cd78a5bdebe815ba021289a607f6c4541f5/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/LuminanceReduceShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/LuminanceReduceShaderRD/3484522051e094e151b4a7cbd88cfc9eb2721ea1d26cd66d6ebdd36e30657cc2/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/MotionVectorsShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/MotionVectorsShaderRD/00e39c95d2d9272edadd9be2db6dbe65b3460f21d2341c92a77371c843cf4d00/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapDownsamplerShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapDownsamplerShaderRD/ffe6788f20aa023afaf7e888e2cf33c840f3084c8fbb309ed784918a44ebcf23/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapFilterShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapFilterShaderRD/5fc5fea9e3fe54191ff165540faa285b099e7909be69e7349c971f7ab0a609cc/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapRoughnessShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/OctmapRoughnessShaderRD/15e894f5c1a4917d83d34012ecf1ede2bee251fefc7b887b728834d4d817ad55/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ParticlesCopyShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ParticlesCopyShaderRD/bcec80ba01e935ed0dc85d792ce6064d3b9920ff6f4ad7f021c39739c998092c/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ParticlesShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ParticlesShaderRD/527b8e067ac0ad8d5ca4af3230efbc7edb63fc49fd10c48dd765f7d4134c2606/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ResolveShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ResolveShaderRD/27dd92d92212d9fee97e14b2c5e5e102610e3124706ce6710bb99bb01c1723a2/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SceneForwardClusteredShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SceneForwardClusteredShaderRD/4a7f175f195e498d54512dc7a67639a3d15bd9ea5194743007a58b5b22b4b699/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SceneForwardClusteredShaderRD/8ab1aa3c06e5871372c06699ba414dca9059b8eb313a79a1ec17202d4c8f34d9/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SceneForwardClusteredShaderRD/72441e69a5110c34824334c2d7284287eeb225010e6fb8c9f80ad241154df663/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SceneForwardClusteredShaderRD/cb9170726728c08dc698861873bcf2c044b0f42ba767496a6fb9315fd7d62b58/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionDownsampleShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionDownsampleShaderRD/e2b08e2f67ca3648565b1054827dd95ce07c1b31c4deeb5c87adb959b48c3662/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionFilterShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionFilterShaderRD/3e7cbd9d8999cd16cf5e5b03b2bc462b40767703140a0757280c95895703123d/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionHizShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionHizShaderRD/baf8f4bfe602462ece1270390433485b1e3018fbbd45bae7c8bbedf320c26cd6/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionResolveShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionResolveShaderRD/e628cc87f903d3043b8b7a44bb5d54638465b46e0ab7bb37b1ddb9b91f4f1b3a/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ScreenSpaceReflectionShaderRD/4ec3777007532ddcd638ae82ef6adc97739054897ed48a2ef8401e7a025ee2da/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDebugProbesShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDebugProbesShaderRD/5e74420cdc840f19f82244b066217b3888799930df17d31ff133420b1a916076/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDebugShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDebugShaderRD/4597a244d5202b1178081479b348d60a48501cb16fc54b1fea4c8395c5e68675/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDirectLightShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiDirectLightShaderRD/16f822b671cd6f4a687e51e33b1c8c2148121c1c091f7ff39f76127556ff3ec3/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiIntegrateShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiIntegrateShaderRD/c5e82715048eb54d931afaa6dadaca3cb48a98f8c3376dd7913485bd1ce2989f/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiPreprocessShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SdfgiPreprocessShaderRD/f3ef78a3d2f1c9d4496e3afe61867e94fb32829809548b265a8a1154b66aec33/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ShadowFrustumShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/ShadowFrustumShaderRD/b56bc1e62633ec9304336b7e957397468d55950f317fcf5a6473439810432caa/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SkeletonShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SkeletonShaderRD/54e50a68f8252031f493dd1ea6200e9ef718d5bd8693e28030efe1b120eb7905/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SkyShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SkyShaderRD/21f924306eb18caac3ace30e495c78ba40ae7b2f490d5e4f3b13a79479216b9c/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaBlendingShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaBlendingShaderRD/3d0a167a9f66fe724550ee422e5f78e94ee25cd28f8d2dd9770c61d98fee5f61/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaEdgeDetectionShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaEdgeDetectionShaderRD/d5021a9d8471f798a9fea1996ea85751035ea859c7fdd21721cc24e149d1e4fe/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaWeightCalculationShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SmaaWeightCalculationShaderRD/96902d6fbf74206adb55a50fd070fc6de4aaf8dc634f04f92751ac8b307948c7/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SortShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SortShaderRD/967234006fae085a9579b3ffd489cee602c4f145dc18ff2bf240e4d8c13498cd/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SpecularMergeShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SpecularMergeShaderRD/d91816cf1f28c63908a9133ffc50683b675ef9859b0616c7436f475405b22c27/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoBlurShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoBlurShaderRD/9821a28f9d156aaaed0a7fab3de6738b2c4022738da0a9b7cb77ffb499f40e38/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoImportanceMapShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoImportanceMapShaderRD/09886b051a7294522d484a6b5de82ee75778fa16804f3f4f13d1605e7f39b69d/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoInterleaveShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoInterleaveShaderRD/5762f4757375a26f8fda6d1bcb2a452f1c2c429e857969bb128d7270760b56f7/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsaoShaderRD/6e8f8fd45ceab920597432cb2a5447c53291203857121f3a3b38a4b9b27c2c50/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsEffectsDownsampleShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsEffectsDownsampleShaderRD/bd37175ba48fdd02099abbbeee5452079e89a3727fd5fe1de649551c99081c36/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilBlurShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilBlurShaderRD/e74ed13ec93f83efa28f3bba922e68d5e345173ff5670ca6f557df8d614a782f/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilImportanceMapShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilImportanceMapShaderRD/a4219fd46be62ae37b0e06fd10ebbd2798ad85088678db4c0b425f823042d4be/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilInterleaveShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilInterleaveShaderRD/88e29bdd44daa6cf920ee2050e7a7237fd88bfa9c8880c62168f4b0a4502f4d0/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SsilShaderRD/af35f1233e4d0591e9dad8d6301cf258931ca4d79c210c67076cd8fb624c6da0/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SubsurfaceScatteringShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/SubsurfaceScatteringShaderRD/69df93a2334ebca4dc3af3f7aef99cad7870b6623865bd4671963fae81796b41/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/TaaResolveShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/TaaResolveShaderRD/21a8f8e3a65237efe11f4640388d4d1a1fac34dfb3102a6aa4c5b6bf6c85e8ea/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/TonemapShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/TonemapShaderRD/c3f5c8110f44921262b756899cc7d2c51c74e9333ffe1f8450a95bbd12872516/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogProcessShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogProcessShaderRD/5a983dd19d944f10c1d3634e2ec4509c330fc708754b14d4216b9f5704a71a62/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogProcessShaderRD/c323a941682e364f2ac33c4d96c03f043ff01d2d1a8ec923fb6520953aed2e93/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogProcessShaderRD/d263a12d61ecbbe0abb0e8af30814fc94808c4c8674479fab02d545dff96f7e1/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogProcessShaderRD/e0e2495360f4e94ec75835ceb7dd861bc7bc3723cd957e130405596c82b92def/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogShaderRD/37d5a85d63465587de4d65fe8624123b742fbec2de5ee217d24a400c1d1c8087/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogShaderRD/98adc80de8af184c1c906595dc32e59c8336c9e57624854a778398ac7b65a69e/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogShaderRD/48422ca2db267dec13a7aa41ba356cdfc7cbfa667e28e02e98b968145e4cc2f5/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VolumetricFogShaderRD/212858dee8b411c576ca1a8745c401347c3dbbf88f247ca2270e8ff0b1093507/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VoxelGiDebugShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VoxelGiDebugShaderRD/4e91a9ddbecad298ed67c31222afae9756053363f06befd837e376dd85b639aa/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VoxelGiShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VoxelGiShaderRD/44b979a30a4cc4de0f731a25d26286e14abc01718fe9a838d597bd153538c665/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VrsShaderRD/::1780025928
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/shader_cache/VrsShaderRD/900dc530b25815516060f98919c8651e2b716465016e38bbda45a386b7edd921/::1780025084
+::res://godot_state_backup_2026-29-05_153848/Fate Prototype/vulkan/::1780025928
+::res://res/::1780016629
+::res://res/actors/::1780016675
+::res://res/actors/enemies/::1780016660
+::res://res/actors/npc/::1780016668
+::res://res/actors/player/::1780027191
+player.tscn::PackedScene::-1::1780027462::0::1::::<><><>0<>0<><>::res://res/actors/player/player_controller.gd<>res://res/actors/player/player_camera_controller.gd<>res://res/actors/player/player_interaction_component.gd<>res://res/actors/player/player_combat_bridge.gd
+player_camera_controller.gd::GDScript::1577216702341208475::1780024648::0::1::::<>Node3D<><>0<>0<><>::
+player_combat_bridge.gd::GDScript::5751094363641632506::1780027462::0::1::::<>Node<><>0<>0<><>::
+player_controller.gd::GDScript::7805827194611797002::1780027554::0::1::::<>CharacterBody3D<><>0<>0<><>::
+player_interaction_component.gd::GDScript::4414442551475251457::1780024648::0::1::::<>RayCast3D<><>0<>0<><>::
+player_locomotion_state.gd::GDScript::1842183006152477077::1780027281::0::1::::PlayerLocomotionState<>RefCounted<><>0<>0<><>::
+player_movement_profile.gd::GDScript::5848324319581322660::1780026961::0::1::::PlayerMovementProfile<>Resource<><>0<>0<><>::
+player_movement_profile_default.tres::Resource/PlayerMovementProfile::-1::1780026969::0::1::::<><><>0<>0<><>::res://res/actors/player/player_movement_profile.gd
+::res://res/assets/::1780016845
+::res://res/assets/fonts/::1780016842
+::res://res/assets/music/::1780016796
+::res://res/assets/sfx/::1780016810
+::res://res/assets/shaders/::1780016786
+::res://res/core/::1780016619
+::res://res/levels/::1780024278
+test_arena.tscn::PackedScene::-1::1780024278::0::1::::<><><>0<>0<><>::res://res/actors/player/player.tscn
+::res://res/ui/::1780016764
+::res://res/ui/menus/::1780016762
+::res://res/weapons/::1780016736
+::res://res/weapons/data/::1780016721
+::res://res/weapons/scenes/::1780016733
+::res://script_templates/::1780024062
+::res://text_editor_themes/::1780024062
