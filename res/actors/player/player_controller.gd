@@ -1,14 +1,5 @@
 extends CharacterBody3D
 
-enum LocomotionState {
-	STANDING,
-	SPRINTING,
-	CROUCHED,
-	SLIDING,
-	AIRBORNE,
-	MANTLING,
-}
-
 @export var movement_profile: PlayerMovementProfile
 
 var walk_speed: float
@@ -49,7 +40,7 @@ var slide_cooldown: float
 @onready var interaction_label: Label = $UI/InteractionLabel
 
 var _gravity := 9.8
-var _state := LocomotionState.STANDING
+var _state := PlayerLocomotionState.Value.STANDING
 var _is_crouching := false
 var _crouch_alpha := 0.0
 var _slide_time_left := 0.0
@@ -124,7 +115,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if _state == LocomotionState.MANTLING:
+	if _state == PlayerLocomotionState.Value.MANTLING:
 		_update_mantle(delta)
 		camera_controller.update_state_effects(false, false, delta)
 		_update_debug_label()
@@ -161,8 +152,8 @@ func _physics_process(delta: float) -> void:
 	_update_crouch_state(delta)
 	_update_horizontal_velocity(move_input, delta)
 	camera_controller.update_state_effects(
-		_state == LocomotionState.SPRINTING,
-		_state == LocomotionState.SLIDING,
+		_state == PlayerLocomotionState.Value.SPRINTING,
+		_state == PlayerLocomotionState.Value.SLIDING,
 		delta
 	)
 
@@ -178,7 +169,7 @@ func _update_horizontal_velocity(move_input: Vector2, delta: float) -> void:
 	var current_horizontal := Vector3(velocity.x, 0.0, velocity.z)
 	var desired_horizontal := Vector3.ZERO
 
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		desired_horizontal = _slide_direction * _slide_speed
 	else:
 		var local_dir := Vector3(move_input.x, 0.0, move_input.y)
@@ -198,33 +189,33 @@ func _update_horizontal_velocity(move_input: Vector2, delta: float) -> void:
 
 func _update_state(sprint_requested: bool) -> void:
 	if not is_on_floor():
-		_state = LocomotionState.AIRBORNE
+		_state = PlayerLocomotionState.Value.AIRBORNE
 		return
 
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		return
 
-	if _state == LocomotionState.MANTLING:
+	if _state == PlayerLocomotionState.Value.MANTLING:
 		return
 
 	if _is_crouching:
-		_state = LocomotionState.CROUCHED
+		_state = PlayerLocomotionState.Value.CROUCHED
 		return
 
 	if sprint_requested:
-		_state = LocomotionState.SPRINTING
+		_state = PlayerLocomotionState.Value.SPRINTING
 		return
 
-	_state = LocomotionState.STANDING
+	_state = PlayerLocomotionState.Value.STANDING
 
 
 func _current_target_speed() -> float:
 	match _state:
-		LocomotionState.CROUCHED:
+		PlayerLocomotionState.Value.CROUCHED:
 			return crouch_speed
-		LocomotionState.SPRINTING:
+		PlayerLocomotionState.Value.SPRINTING:
 			return sprint_speed
-		LocomotionState.AIRBORNE:
+		PlayerLocomotionState.Value.AIRBORNE:
 			return walk_speed
 		_:
 			return walk_speed
@@ -233,7 +224,7 @@ func _current_target_speed() -> float:
 func _update_crouch_state(delta: float) -> void:
 	var crouch_held := Input.is_action_pressed("crouch")
 
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		_is_crouching = true
 	elif crouch_held:
 		_is_crouching = true
@@ -258,7 +249,7 @@ func _apply_crouch_pose(alpha: float) -> void:
 
 
 func _can_stand_up() -> bool:
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		return false
 
 	var capsule := collision_shape.shape as CapsuleShape3D
@@ -289,7 +280,7 @@ func _can_start_slide(sprint_requested: bool) -> bool:
 	if _slide_cooldown_left > 0.0:
 		return false
 
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		return false
 
 	if not is_on_floor():
@@ -302,7 +293,7 @@ func _can_start_slide(sprint_requested: bool) -> bool:
 
 
 func _begin_slide() -> void:
-	_state = LocomotionState.SLIDING
+	_state = PlayerLocomotionState.Value.SLIDING
 	_is_crouching = true
 	_slide_time_left = slide_duration
 	_slide_speed = max(_horizontal_speed(), slide_start_speed)
@@ -312,7 +303,7 @@ func _begin_slide() -> void:
 
 
 func _update_slide(delta: float) -> void:
-	if _state != LocomotionState.SLIDING:
+	if _state != PlayerLocomotionState.Value.SLIDING:
 		return
 
 	_slide_time_left -= delta
@@ -322,9 +313,9 @@ func _update_slide(delta: float) -> void:
 
 
 func _end_slide() -> void:
-	if _state == LocomotionState.SLIDING:
+	if _state == PlayerLocomotionState.Value.SLIDING:
 		_slide_cooldown_left = slide_cooldown
-	_state = LocomotionState.STANDING
+	_state = PlayerLocomotionState.Value.STANDING
 	_slide_time_left = 0.0
 
 
@@ -332,7 +323,7 @@ func _can_start_mantle(move_input: Vector2, on_floor: bool) -> bool:
 	if on_floor:
 		return false
 
-	if _state == LocomotionState.SLIDING or _state == LocomotionState.MANTLING:
+	if _state == PlayerLocomotionState.Value.SLIDING or _state == PlayerLocomotionState.Value.MANTLING:
 		return false
 
 	if move_input.y >= -0.1:
@@ -391,7 +382,7 @@ func _begin_mantle() -> void:
 		if not found_clear_target:
 			return
 
-	_state = LocomotionState.MANTLING
+	_state = PlayerLocomotionState.Value.MANTLING
 	velocity = Vector3.ZERO
 	_is_crouching = false
 	_mantle_time_left = mantle_duration
@@ -408,7 +399,7 @@ func _update_mantle(delta: float) -> void:
 
 	if _mantle_time_left <= 0.0:
 		global_position = _mantle_target_position
-		_state = LocomotionState.STANDING
+		_state = PlayerLocomotionState.Value.STANDING
 
 
 func _horizontal_speed() -> float:
@@ -416,32 +407,14 @@ func _horizontal_speed() -> float:
 
 
 func _update_debug_label() -> void:
-	var name := _state_name()
-	combat_bridge.update_from_locomotion_state(StringName(name))
+	var name := PlayerLocomotionState.name_for(_state)
+	combat_bridge.update_from_locomotion_state(_state)
 	state_label.text = "State: %s | Speed: %.2f | Weapon: %s" % [
 		name,
 		_horizontal_speed(),
 		combat_bridge.readiness_name()
 	]
 	interaction_label.text = interaction_component.get_interaction_hint()
-
-
-func _state_name() -> String:
-	match _state:
-		LocomotionState.STANDING:
-			return "Standing"
-		LocomotionState.SPRINTING:
-			return "Sprinting"
-		LocomotionState.CROUCHED:
-			return "Crouched"
-		LocomotionState.SLIDING:
-			return "Sliding"
-		LocomotionState.AIRBORNE:
-			return "Airborne"
-		LocomotionState.MANTLING:
-			return "Mantling"
-		_:
-			return "Unknown"
 
 
 func _ensure_default_input_actions() -> void:

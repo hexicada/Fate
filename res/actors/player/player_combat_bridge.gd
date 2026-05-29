@@ -10,11 +10,11 @@ enum WeaponReadiness {
 var readiness := WeaponReadiness.READY
 
 
-func update_from_locomotion_state(state_name: StringName) -> void:
-	match state_name:
-		"Sprinting":
+func update_from_locomotion_state(state: int) -> void:
+	match state:
+		PlayerLocomotionState.Value.SPRINTING:
 			readiness = WeaponReadiness.LOWERED
-		"Sliding":
+		PlayerLocomotionState.Value.SLIDING:
 			readiness = WeaponReadiness.SLIDE
 		_:
 			readiness = WeaponReadiness.READY
