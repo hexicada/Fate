@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://res/actors/player/player_controller.gd" id="1_kkxib"]
 [ext_resource type="Script" path="res://res/actors/player/player_camera_controller.gd" id="2_3qoh2"]
 [ext_resource type="Script" path="res://res/actors/player/player_interaction_component.gd" id="3_kg584"]
 [ext_resource type="Script" path="res://res/actors/player/player_combat_bridge.gd" id="4_h6s3b"]
+[ext_resource type="Resource" path="res://res/actors/player/player_movement_profile_default.tres" id="5_xsgd0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v2rf"]
 radius = 0.35
@@ -20,6 +21,7 @@ roughness = 0.72
 [node name="Player" type="CharacterBody3D"]
 floor_snap_length = 0.25
 script = ExtResource("1_kkxib")
+movement_profile = ExtResource("5_xsgd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.9, 0)

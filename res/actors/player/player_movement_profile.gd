@@ -10,6 +10,10 @@ class_name PlayerMovementProfile
 @export var ground_deceleration := 24.0
 @export var air_acceleration := 8.0
 
+@export_group("Air")
+@export var max_air_jumps := 1
+@export var air_jump_velocity := 5.2
+
 @export_group("Crouch")
 @export var standing_capsule_height := 1.8
 @export var crouched_capsule_height := 1.2

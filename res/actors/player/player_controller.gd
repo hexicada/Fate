@@ -9,39 +9,32 @@ enum LocomotionState {
 	MANTLING,
 }
 
-@export_group("Movement")
-@export var walk_speed := 5.5
-@export var sprint_speed := 8.5
-@export var crouch_speed := 3.0
-@export var jump_velocity := 5.2
-@export var ground_acceleration := 32.0
-@export var ground_deceleration := 24.0
-@export var air_acceleration := 8.0
+@export var movement_profile: PlayerMovementProfile
 
-@export_group("Air")
-@export var max_air_jumps := 1
-@export var air_jump_velocity := 5.2
-
-@export_group("Crouch")
-@export var standing_capsule_height := 1.8
-@export var crouched_capsule_height := 1.2
-@export var standing_eye_height := 1.6
-@export var crouched_eye_height := 1.0
-@export var crouch_blend_speed := 10.0
-
-@export_group("Mantle")
-@export var mantle_min_height := 0.7
-@export var mantle_max_height := 1.5
-@export var mantle_duration := 0.2
-@export var mantle_forward_distance := 0.9
-@export var mantle_wall_angle_limit := 0.4
-
-@export_group("Slide")
-@export var slide_start_speed := 9.5
-@export var slide_min_start_speed := 6.5
-@export var slide_duration := 0.45
-@export var slide_friction := 14.0
-@export var slide_cooldown := 0.2
+var walk_speed: float
+var sprint_speed: float
+var crouch_speed: float
+var jump_velocity: float
+var ground_acceleration: float
+var ground_deceleration: float
+var air_acceleration: float
+var max_air_jumps: int
+var air_jump_velocity: float
+var standing_capsule_height: float
+var crouched_capsule_height: float
+var standing_eye_height: float
+var crouched_eye_height: float
+var crouch_blend_speed: float
+var mantle_min_height: float
+var mantle_max_height: float
+var mantle_duration: float
+var mantle_forward_distance: float
+var mantle_wall_angle_limit: float
+var slide_start_speed: float
+var slide_min_start_speed: float
+var slide_duration: float
+var slide_friction: float
+var slide_cooldown: float
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var body_mesh: MeshInstance3D = $BodyMesh
@@ -72,6 +65,7 @@ var _air_jumps_left := 0
 func _ready() -> void:
 	_ensure_default_input_actions()
 	_gravity = float(ProjectSettings.get_setting("physics/3d/default_gravity", 9.8))
+	_apply_movement_profile()
 	_apply_crouch_pose(0.0)
 	camera_controller.set("standing_eye_height", standing_eye_height)
 	camera_controller.set("crouched_eye_height", crouched_eye_height)
@@ -81,6 +75,36 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hint_label.text = "WASD move | Shift sprint | Space jump/double jump | Ctrl crouch/slide | Jump into ledges to mantle | Esc mouse"
 	_update_debug_label()
+
+
+func _apply_movement_profile() -> void:
+	if movement_profile == null:
+		movement_profile = PlayerMovementProfile.new()
+
+	walk_speed = movement_profile.walk_speed
+	sprint_speed = movement_profile.sprint_speed
+	crouch_speed = movement_profile.crouch_speed
+	jump_velocity = movement_profile.jump_velocity
+	ground_acceleration = movement_profile.ground_acceleration
+	ground_deceleration = movement_profile.ground_deceleration
+	air_acceleration = movement_profile.air_acceleration
+	max_air_jumps = movement_profile.max_air_jumps
+	air_jump_velocity = movement_profile.air_jump_velocity
+	standing_capsule_height = movement_profile.standing_capsule_height
+	crouched_capsule_height = movement_profile.crouched_capsule_height
+	standing_eye_height = movement_profile.standing_eye_height
+	crouched_eye_height = movement_profile.crouched_eye_height
+	crouch_blend_speed = movement_profile.crouch_blend_speed
+	mantle_min_height = movement_profile.mantle_min_height
+	mantle_max_height = movement_profile.mantle_max_height
+	mantle_duration = movement_profile.mantle_duration
+	mantle_forward_distance = movement_profile.mantle_forward_distance
+	mantle_wall_angle_limit = movement_profile.mantle_wall_angle_limit
+	slide_start_speed = movement_profile.slide_start_speed
+	slide_min_start_speed = movement_profile.slide_min_start_speed
+	slide_duration = movement_profile.slide_duration
+	slide_friction = movement_profile.slide_friction
+	slide_cooldown = movement_profile.slide_cooldown
 
 
 func _unhandled_input(event: InputEvent) -> void:
