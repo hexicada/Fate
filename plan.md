@@ -221,3 +221,36 @@ Class identity should layer through gear, abilities, and effects rather than bod
 - Pending tune: mantle arc, target placement, and ledge validation strictness
 - Deferred: revive/beacon interaction logic beyond target detection
 - Deferred: subclass/class ability systems and Gira runtime integration
+
+## Body v0 Decision (May 29, 2026)
+- Approach is locked to **Hybrid First-Person**
+- Gameplay movement, collision, and state machine remain body-agnostic
+- Visual body presentation is split:
+  - first-person presentation rig for local view
+  - full world body rig for third-person visibility, shadows, and multiplayer
+- Male/female/customized bodies from the character-creator pipeline must plug into the same gameplay contract
+
+## Hybrid Body v0 Contract
+- **Gameplay authority**
+  - `player_controller.gd` and collision capsule remain the source of truth for movement and interaction
+  - Body assets cannot alter gameplay movement values, hit logic, or interaction reach
+- **Scene architecture target**
+  - Keep current controller root and movement probes
+  - Add/maintain two visual layers:
+    - FP layer: local-only arms/weapon presentation
+    - World layer: full character mesh driven by locomotion state
+- **Animation contract**
+  - Required shared locomotion states: standing, sprinting, crouched, sliding, airborne, mantling
+  - Both FP and world rigs must map to these same locomotion states
+  - Male/female differences are animation and mesh differences only, not gameplay logic differences
+- **Character creator integration contract**
+  - Character creator outputs body mesh + materials + optional per-body animation profile mapping
+  - Runtime body swapping must not require changes to locomotion code
+  - Gear/class fantasy should layer through attachments, FX, and ability systems
+
+## Hybrid Body v0 First Build Order
+1. Add placeholder FP visual rig node group to player scene
+2. Add placeholder world body visual rig node group to player scene
+3. Feed locomotion state to both visual layers (no gameplay changes)
+4. Verify stance transitions visually for male and female placeholder assets
+5. Add attachment anchors for helmet/chest/arms/legs/primary/secondary/melee

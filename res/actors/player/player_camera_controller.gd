@@ -8,6 +8,8 @@ class_name PlayerCameraController
 @export var crouched_eye_height := 1.0
 @export var eye_blend_speed := 10.0
 @export var sprint_tilt_degrees := 1.5
+@export var controller_look_speed := 150.0
+@export var controller_look_deadzone := 0.16
 
 var _pitch_degrees := 0.0
 var _eye_alpha := 0.0
@@ -18,6 +20,22 @@ func handle_input(event: InputEvent, body: Node3D) -> void:
 		body.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		_pitch_degrees = clamp(_pitch_degrees - event.relative.y * mouse_sensitivity, pitch_min, pitch_max)
 		rotation.x = deg_to_rad(_pitch_degrees)
+
+
+func update_controller_look(body: Node3D, delta: float) -> void:
+	var look_x := Input.get_axis("look_left", "look_right")
+	var look_y := Input.get_axis("look_up", "look_down")
+	var look := Vector2(look_x, look_y)
+	var mag := look.length()
+	if mag < controller_look_deadzone:
+		return
+
+	var scaled_mag := (mag - controller_look_deadzone) / maxf(1.0 - controller_look_deadzone, 0.001)
+	look = look.normalized() * clampf(scaled_mag, 0.0, 1.0)
+
+	body.rotate_y(deg_to_rad(-look.x * controller_look_speed * delta))
+	_pitch_degrees = clamp(_pitch_degrees - look.y * controller_look_speed * delta, pitch_min, pitch_max)
+	rotation.x = deg_to_rad(_pitch_degrees)
 
 
 func update_eye_height(crouch_alpha: float, delta: float) -> void:

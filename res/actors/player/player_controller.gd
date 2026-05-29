@@ -64,7 +64,7 @@ func _ready() -> void:
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD move | Shift sprint | Space jump/double jump | Ctrl crouch/slide | Jump into ledges to mantle | Esc mouse"
+	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
 	_update_debug_label()
 
 
@@ -115,6 +115,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	camera_controller.update_controller_look(self, delta)
+
 	if _state == PlayerLocomotionState.Value.MANTLING:
 		_update_mantle(delta)
 		camera_controller.update_state_effects(false, false, delta)
