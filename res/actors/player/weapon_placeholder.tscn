@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://res/actors/player/weapon_view_model.gd" id="1_h54qb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(0.18, 0.1, 0.45)
+
+[sub_resource type="BoxMesh" id="BoxMesh_barrel"]
+size = Vector3(0.05, 0.04, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weapon"]
+albedo_color = Color(0.168627, 0.168627, 0.188235, 1)
+metallic = 0.5
+roughness = 0.55
+
+[node name="WeaponViewModel" type="Node3D"]
+script = ExtResource("1_h54qb")
+weapon_name = "Placeholder SMG"
+hip_offset = Vector3(0.06, -0.06, 0.02)
+ads_offset = Vector3(0.01, -0.015, -0.11)
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0.09, -0.01, -0.22)
+mesh = SubResource("BoxMesh_body")
+material_override = SubResource("StandardMaterial3D_weapon")
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0.1, -0.005, -0.54)
+mesh = SubResource("BoxMesh_barrel")
+material_override = SubResource("StandardMaterial3D_weapon")

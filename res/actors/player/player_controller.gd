@@ -33,6 +33,7 @@ var slide_cooldown: float
 @onready var camera_controller: PlayerCameraController = $HeadPivot
 @onready var interaction_component: PlayerInteractionComponent = $HeadPivot/InteractionRayCast3D
 @onready var combat_bridge: PlayerCombatBridge = $CombatBridge
+@onready var weapon_anchor: Node3D = $HeadPivot/WeaponPivot/WeaponAnchor
 @onready var mantle_probe_lower: RayCast3D = $MantleProbeLower
 @onready var mantle_probe_upper: RayCast3D = $MantleProbeUpper
 @onready var state_label: Label = $UI/StateLabel
@@ -51,6 +52,7 @@ var _mantle_time_left := 0.0
 var _mantle_start_position := Vector3.ZERO
 var _mantle_target_position := Vector3.ZERO
 var _air_jumps_left := 0
+var _weapon_view_model: Node3D
 
 
 func _ready() -> void:
@@ -64,7 +66,11 @@ func _ready() -> void:
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
+	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | LMB/RT fire | RMB/LT ADS | R/X reload | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
+	if weapon_anchor.has_method("get_active_view_model"):
+		_weapon_view_model = weapon_anchor.get_active_view_model()
+	if _weapon_view_model and _weapon_view_model.has_method("set_pose_name"):
+		_weapon_view_model.set_pose_name("hip")
 	_update_debug_label()
 
 
@@ -116,6 +122,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	camera_controller.update_controller_look(self, delta)
+	_update_weapon_view_model()
 
 	if _state == PlayerLocomotionState.Value.MANTLING:
 		_update_mantle(delta)
@@ -406,6 +413,28 @@ func _update_mantle(delta: float) -> void:
 
 func _horizontal_speed() -> float:
 	return Vector2(velocity.x, velocity.z).length()
+
+
+func _update_weapon_view_model() -> void:
+	if weapon_anchor == null:
+		return
+
+	var ads_held := InputMap.has_action("ads") and Input.is_action_pressed("ads")
+	if weapon_anchor.has_method("set_ads_enabled"):
+		weapon_anchor.set_ads_enabled(ads_held)
+
+	if _weapon_view_model == null:
+		if weapon_anchor.has_method("get_active_view_model"):
+			_weapon_view_model = weapon_anchor.get_active_view_model()
+		if _weapon_view_model == null:
+			return
+
+	if _weapon_view_model.has_method("set_pose_name"):
+		_weapon_view_model.set_pose_name("ads" if ads_held else "hip")
+	if _weapon_view_model.has_method("on_fire") and InputMap.has_action("fire") and Input.is_action_just_pressed("fire"):
+		_weapon_view_model.on_fire()
+	if _weapon_view_model.has_method("on_reload") and InputMap.has_action("reload") and Input.is_action_just_pressed("reload"):
+		_weapon_view_model.on_reload()
 
 
 func _update_debug_label() -> void:
