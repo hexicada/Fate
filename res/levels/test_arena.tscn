@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ivwx7veflqnr"]
 
-[ext_resource type="PackedScene" path="res://res/actors/player/player.tscn" id="1_u1nq2"]
+[ext_resource type="PackedScene" uid="uid://dir4p3muy3vrt" path="res://res/actors/player/player.tscn" id="1_u1nq2"]
+[ext_resource type="Texture2D" uid="uid://dbde4o56l2p4h" path="res://res/assets/shaders/moon_surface_regolith_01.png" id="2_scvk2"]
 
 [sub_resource type="Environment" id="Environment_8u6y4"]
 background_mode = 2
@@ -9,14 +10,15 @@ ambient_light_source = 3
 ambient_light_color = Color(0.45, 0.5, 0.57, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uw2fp"]
-size = Vector3(48, 1, 48)
+size = Vector3(64, 1, 64)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7b23r"]
-albedo_color = Color(0.258824, 0.305882, 0.278431, 1)
+albedo_texture = ExtResource("2_scvk2")
 roughness = 0.88
+uv1_scale = Vector3(4, 4, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4v2n7"]
-size = Vector3(48, 1, 48)
+size = Vector3(64, 1, 64)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2ppvf"]
 size = Vector3(2.5, 1.2, 2.5)
@@ -41,6 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_uw2fp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1348699124]
+transform = Transform3D(0.9979403, 0, -0.064149134, 0, 1, 0, 0.064149134, 0, 0.9979403, 0, 0, -3.623001)
 material_override = SubResource("StandardMaterial3D_7b23r")
 mesh = SubResource("BoxMesh_4v2n7")
 
@@ -73,4 +76,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.019923449, 0.29981136)
 mesh = SubResource("BoxMesh_vqvfq")
 
 [node name="Player" parent="." unique_id=970677083 instance=ExtResource("1_u1nq2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 6)
+transform = Transform3D(-0.91555035, 0, -0.4022034, 0, 1, 0, 0.4022034, 0, -0.91555035, -0.80473113, 0.1772657, 6.047249)

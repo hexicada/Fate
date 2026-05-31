@@ -32,7 +32,6 @@ var slide_cooldown: float
 @onready var head_pivot: Node3D = $HeadPivot
 @onready var camera_controller: PlayerCameraController = $HeadPivot
 @onready var interaction_component: PlayerInteractionComponent = $HeadPivot/InteractionRayCast3D
-@onready var combat_bridge: PlayerCombatBridge = $CombatBridge
 @onready var mantle_probe_lower: RayCast3D = $MantleProbeLower
 @onready var mantle_probe_upper: RayCast3D = $MantleProbeUpper
 @onready var state_label: Label = $UI/StateLabel
@@ -51,9 +50,6 @@ var _mantle_time_left := 0.0
 var _mantle_start_position := Vector3.ZERO
 var _mantle_target_position := Vector3.ZERO
 var _air_jumps_left := 0
-var weapon_anchor: Node3D
-var _weapon_view_model: Node3D
-var _fps_arms_root: Node3D
 
 
 func _ready() -> void:
@@ -67,16 +63,7 @@ func _ready() -> void:
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | LMB/RT fire | RMB/LT ADS | R/X reload | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
-	weapon_anchor = get_node_or_null("HeadPivot/WeaponPivot/FpsArms/TemplarArms_Rig/Skeleton3D/WeaponBoneAttachment/WeaponAnchor")
-	if weapon_anchor == null:
-		push_warning("PlayerController: weapon anchor not found. Check FpsArms/BoneAttachment wiring.")
-	_fps_arms_root = get_node_or_null("HeadPivot/WeaponPivot/FpsArms")
-	_configure_viewmodel_rendering()
-	if weapon_anchor and weapon_anchor.has_method("get_active_view_model"):
-		_weapon_view_model = weapon_anchor.get_active_view_model()
-	if _weapon_view_model and _weapon_view_model.has_method("set_pose_name"):
-		_weapon_view_model.set_pose_name("hip")
+	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
 	_update_debug_label()
 
 
@@ -128,7 +115,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	camera_controller.update_controller_look(self, delta)
-	_update_weapon_view_model()
 
 	if _state == PlayerLocomotionState.Value.MANTLING:
 		_update_mantle(delta)
@@ -421,47 +407,11 @@ func _horizontal_speed() -> float:
 	return Vector2(velocity.x, velocity.z).length()
 
 
-func _update_weapon_view_model() -> void:
-	if weapon_anchor == null:
-		return
-
-	var ads_held := InputMap.has_action("ads") and Input.is_action_pressed("ads")
-	if weapon_anchor.has_method("set_ads_enabled"):
-		weapon_anchor.set_ads_enabled(ads_held)
-
-	if _weapon_view_model == null:
-		if weapon_anchor.has_method("get_active_view_model"):
-			_weapon_view_model = weapon_anchor.get_active_view_model()
-		if _weapon_view_model == null:
-			return
-
-	if _weapon_view_model.has_method("set_pose_name"):
-		_weapon_view_model.set_pose_name("ads" if ads_held else "hip")
-	if _weapon_view_model.has_method("on_fire") and InputMap.has_action("fire") and Input.is_action_just_pressed("fire"):
-		_weapon_view_model.on_fire()
-	if _weapon_view_model.has_method("on_reload") and InputMap.has_action("reload") and Input.is_action_just_pressed("reload"):
-		_weapon_view_model.on_reload()
-
-
-func _configure_viewmodel_rendering() -> void:
-	if _fps_arms_root == null:
-		return
-
-	for child in _fps_arms_root.find_children("*", "MeshInstance3D", true, false):
-		var mesh := child as MeshInstance3D
-		if mesh == null:
-			continue
-		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		mesh.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
-
-
 func _update_debug_label() -> void:
 	var name := PlayerLocomotionState.name_for(_state)
-	combat_bridge.update_from_locomotion_state(_state)
-	state_label.text = "State: %s | Speed: %.2f | Weapon: %s" % [
+	state_label.text = "State: %s | Speed: %.2f" % [
 		name,
-		_horizontal_speed(),
-		combat_bridge.readiness_name()
+		_horizontal_speed()
 	]
 	interaction_label.text = interaction_component.get_interaction_hint()
 
