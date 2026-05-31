@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://res/actors/player/player_controller.gd" id="1_kkxib"]
 [ext_resource type="Script" path="res://res/actors/player/player_camera_controller.gd" id="2_3qoh2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" path="res://res/actors/player/player_movement_profile_default.tres" id="5_xsgd0"]
 [ext_resource type="Script" path="res://res/actors/player/weapon_anchor.gd" id="6_w9u6n"]
 [ext_resource type="PackedScene" path="res://res/actors/player/weapon_placeholder.tscn" id="7_ejup4"]
+[ext_resource type="PackedScene" path="res://res/actors/player/fate_fps_arms_v2_rigged.glb" id="8_3xj4s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v2rf"]
 radius = 0.35
@@ -49,11 +50,19 @@ script = ExtResource("3_kg584")
 [node name="WeaponPivot" type="Node3D" parent="HeadPivot"]
 position = Vector3(0.24, -0.22, -0.35)
 
-[node name="WeaponAnchor" type="Node3D" parent="HeadPivot/WeaponPivot"]
-script = ExtResource("6_w9u6n")
-ads_position = Vector3(-0.01, 0.015, -0.04)
+[node name="FpsArms" parent="HeadPivot/WeaponPivot" instance=ExtResource("8_3xj4s")]
+position = Vector3(-0.24, -0.08, -0.08)
 
-[node name="WeaponViewModel" parent="HeadPivot/WeaponPivot/WeaponAnchor" instance=ExtResource("7_ejup4")]
+[node name="WeaponBoneAttachment" type="BoneAttachment3D" parent="HeadPivot/WeaponPivot/FpsArms/TemplarArms_Rig/Skeleton3D"]
+bone_name = "hand_L"
+
+[node name="WeaponAnchor" type="Node3D" parent="HeadPivot/WeaponPivot/FpsArms/TemplarArms_Rig/Skeleton3D/WeaponBoneAttachment"]
+script = ExtResource("6_w9u6n")
+hip_rotation_degrees = Vector3(180, 180, 0)
+ads_position = Vector3(-0.01, 0.015, -0.04)
+ads_rotation_degrees = Vector3(180, 180, 0)
+
+[node name="WeaponViewModel" parent="HeadPivot/WeaponPivot/FpsArms/TemplarArms_Rig/Skeleton3D/WeaponBoneAttachment/WeaponAnchor" instance=ExtResource("7_ejup4")]
 
 [node name="CombatBridge" type="Node" parent="."]
 script = ExtResource("4_h6s3b")

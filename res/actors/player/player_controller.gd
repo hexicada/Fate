@@ -33,7 +33,6 @@ var slide_cooldown: float
 @onready var camera_controller: PlayerCameraController = $HeadPivot
 @onready var interaction_component: PlayerInteractionComponent = $HeadPivot/InteractionRayCast3D
 @onready var combat_bridge: PlayerCombatBridge = $CombatBridge
-@onready var weapon_anchor: Node3D = $HeadPivot/WeaponPivot/WeaponAnchor
 @onready var mantle_probe_lower: RayCast3D = $MantleProbeLower
 @onready var mantle_probe_upper: RayCast3D = $MantleProbeUpper
 @onready var state_label: Label = $UI/StateLabel
@@ -52,7 +51,9 @@ var _mantle_time_left := 0.0
 var _mantle_start_position := Vector3.ZERO
 var _mantle_target_position := Vector3.ZERO
 var _air_jumps_left := 0
+var weapon_anchor: Node3D
 var _weapon_view_model: Node3D
+var _fps_arms_root: Node3D
 
 
 func _ready() -> void:
@@ -67,7 +68,12 @@ func _ready() -> void:
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | LMB/RT fire | RMB/LT ADS | R/X reload | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
-	if weapon_anchor.has_method("get_active_view_model"):
+	weapon_anchor = get_node_or_null("HeadPivot/WeaponPivot/FpsArms/TemplarArms_Rig/Skeleton3D/WeaponBoneAttachment/WeaponAnchor")
+	if weapon_anchor == null:
+		push_warning("PlayerController: weapon anchor not found. Check FpsArms/BoneAttachment wiring.")
+	_fps_arms_root = get_node_or_null("HeadPivot/WeaponPivot/FpsArms")
+	_configure_viewmodel_rendering()
+	if weapon_anchor and weapon_anchor.has_method("get_active_view_model"):
 		_weapon_view_model = weapon_anchor.get_active_view_model()
 	if _weapon_view_model and _weapon_view_model.has_method("set_pose_name"):
 		_weapon_view_model.set_pose_name("hip")
@@ -435,6 +441,18 @@ func _update_weapon_view_model() -> void:
 		_weapon_view_model.on_fire()
 	if _weapon_view_model.has_method("on_reload") and InputMap.has_action("reload") and Input.is_action_just_pressed("reload"):
 		_weapon_view_model.on_reload()
+
+
+func _configure_viewmodel_rendering() -> void:
+	if _fps_arms_root == null:
+		return
+
+	for child in _fps_arms_root.find_children("*", "MeshInstance3D", true, false):
+		var mesh := child as MeshInstance3D
+		if mesh == null:
+			continue
+		mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		mesh.gi_mode = GeometryInstance3D.GI_MODE_DISABLED
 
 
 func _update_debug_label() -> void:
