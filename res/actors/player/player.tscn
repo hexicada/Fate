@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djhg3lp50lxf3" path="res://res/actors/player/player_controller.gd" id="1_kkxib"]
 [ext_resource type="Script" uid="uid://wqar8egpsqmd" path="res://res/actors/player/player_camera_controller.gd" id="2_3qoh2"]
 [ext_resource type="Script" uid="uid://b35nhu11ofha4" path="res://res/actors/player/player_interaction_component.gd" id="3_kg584"]
+[ext_resource type="Script" uid="uid://cn64xiu67ytti" path="res://res/actors/player/player_combat_bridge.gd" id="5_jmhdq"]
 [ext_resource type="Resource" path="res://res/actors/player/player_movement_profile_default.tres" id="5_xsgd0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v2rf"]
@@ -15,6 +16,8 @@ roughness = 0.72
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x5jlt"]
 radius = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_aexle"]
 
 [node name="Player" type="CharacterBody3D" unique_id=579228476]
 floor_snap_length = 0.25
@@ -38,7 +41,13 @@ script = ExtResource("2_3qoh2")
 current = true
 
 [node name="ViewModelRoot" type="Node3D" parent="HeadPivot/Camera3D" unique_id=63739206]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="UpperFP" type="Node3D" parent="HeadPivot/Camera3D/ViewModelRoot" unique_id=122128862]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HeadPivot/Camera3D/ViewModelRoot/UpperFP" unique_id=863693678]
+mesh = SubResource("BoxMesh_aexle")
+
+[node name="LowerFP" type="Node3D" parent="HeadPivot/Camera3D/ViewModelRoot" unique_id=2119956235]
 
 [node name="InteractionRayCast3D" type="RayCast3D" parent="HeadPivot" unique_id=1645666647]
 target_position = Vector3(0, 0, -2.6)
@@ -73,3 +82,12 @@ offset_left = 16.0
 offset_top = 68.0
 offset_right = 560.0
 offset_bottom = 110.0
+
+[node name="WorldBodyRoot" type="Node3D" parent="." unique_id=48881412]
+editor_description = "Placeholder for the full world character rig (male/female bodies, shadows, third-person visibility, multiplayer).
+   Both FP layers and this root must eventually be driven by the same locomotion states."
+
+[node name="CombatBridge" type="Node" parent="." unique_id=178670848]
+editor_description = "Logic mediator. Controller will push locomotion state here.
+   UpperFP (and later LowerFP) will read weapon readiness and stance from here."
+script = ExtResource("5_jmhdq")

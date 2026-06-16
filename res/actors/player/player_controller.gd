@@ -37,6 +37,7 @@ var slide_cooldown: float
 @onready var state_label: Label = $UI/StateLabel
 @onready var hint_label: Label = $UI/HintLabel
 @onready var interaction_label: Label = $UI/InteractionLabel
+@onready var combat_bridge: PlayerCombatBridge = $CombatBridge
 
 var _gravity := 9.8
 var _state := PlayerLocomotionState.Value.STANDING
@@ -63,7 +64,8 @@ func _ready() -> void:
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Forward+Air = very forgiving mantle (any ledge contact, even angled or slightly above head) | Esc mouse"
+	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch/slide | Esc mouse"
+	combat_bridge.update_from_locomotion_state(_state)
 	_update_debug_label()
 
 
@@ -119,6 +121,7 @@ func _physics_process(delta: float) -> void:
 	if _state == PlayerLocomotionState.Value.MANTLING:
 		_update_mantle(delta)
 		camera_controller.update_state_effects(false, false, delta)
+		combat_bridge.update_from_locomotion_state(_state)
 		_update_debug_label()
 		return
 
@@ -146,6 +149,7 @@ func _physics_process(delta: float) -> void:
 	if _can_start_mantle(move_input, on_floor):
 		_begin_mantle()
 		camera_controller.update_state_effects(false, false, delta)
+		combat_bridge.update_from_locomotion_state(_state)
 		_update_debug_label()
 		return
 
@@ -163,6 +167,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	_update_state(sprint_requested)
+	combat_bridge.update_from_locomotion_state(_state)
 	_update_debug_label()
 
 
@@ -318,6 +323,7 @@ func _end_slide() -> void:
 		_slide_cooldown_left = slide_cooldown
 	_state = PlayerLocomotionState.Value.STANDING
 	_slide_time_left = 0.0
+	combat_bridge.update_from_locomotion_state(_state)
 
 
 func _can_start_mantle(move_input: Vector2, on_floor: bool) -> bool:
@@ -452,6 +458,7 @@ func _begin_mantle() -> void:
 	_mantle_time_left = mantle_duration
 	_mantle_start_position = global_position
 	_mantle_target_position = target
+	combat_bridge.update_from_locomotion_state(_state)
 
 
 func _update_mantle(delta: float) -> void:
@@ -464,6 +471,7 @@ func _update_mantle(delta: float) -> void:
 	if _mantle_time_left <= 0.0:
 		global_position = _mantle_target_position
 		_state = PlayerLocomotionState.Value.STANDING
+		combat_bridge.update_from_locomotion_state(_state)
 
 
 func _horizontal_speed() -> float:
@@ -471,10 +479,12 @@ func _horizontal_speed() -> float:
 
 
 func _update_debug_label() -> void:
-	var name := PlayerLocomotionState.name_for(_state)
-	state_label.text = "State: %s | Speed: %.2f" % [
-		name,
-		_horizontal_speed()
+	var state_name := PlayerLocomotionState.name_for(_state)
+	var weapon_ready := combat_bridge.readiness_name() if combat_bridge else "-"
+	state_label.text = "State: %s | Speed: %.2f | Weapon: %s" % [
+		state_name,
+		_horizontal_speed(),
+		weapon_ready
 	]
 	interaction_label.text = interaction_component.get_interaction_hint()
 
