@@ -22,11 +22,11 @@ class_name PlayerMovementProfile
 @export var crouch_blend_speed := 10.0
 
 @export_group("Mantle")
-@export var mantle_min_height := 0.7
-@export var mantle_max_height := 1.5
-@export var mantle_duration := 0.2
-@export var mantle_forward_distance := 0.9
-@export var mantle_wall_angle_limit := 0.4
+@export var mantle_min_height := 0.35
+@export var mantle_max_height := 2.6
+@export var mantle_duration := 0.45
+@export var mantle_forward_distance := 1.2
+@export var mantle_wall_angle_limit := 0.65
 
 @export_group("Slide")
 @export var slide_start_speed := 9.5

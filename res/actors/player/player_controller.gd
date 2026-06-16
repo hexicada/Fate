@@ -63,7 +63,7 @@ func _ready() -> void:
 	mantle_probe_upper.enabled = true
 	_air_jumps_left = max_air_jumps
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Esc mouse"
+	hint_label.text = "WASD/Left stick move | Mouse/Right stick look | Shift/L3 sprint | Space/A jump | Ctrl/B crouch | Forward+Air = very forgiving mantle (any ledge contact, even angled or slightly above head) | Esc mouse"
 	_update_debug_label()
 
 
@@ -327,61 +327,124 @@ func _can_start_mantle(move_input: Vector2, on_floor: bool) -> bool:
 	if _state == PlayerLocomotionState.Value.SLIDING or _state == PlayerLocomotionState.Value.MANTLING:
 		return false
 
-	if move_input.y >= -0.1:
+	# Very permissive input: only hard back-pushing or almost no movement blocks it.
+	# We want mantle to trigger on "any contact" with a valid ledge.
+	if move_input.y > 0.45 or (move_input.length() < 0.05 and _horizontal_speed() < 0.8):
 		return false
 
-	if velocity.y > 1.0:
+	# Extremely loose vertical velocity. We want reach-up even near jump apex or slight rise.
+	if velocity.y > 7.5:
 		return false
 
-	if not mantle_probe_lower.is_colliding() or mantle_probe_upper.is_colliding():
-		return false
-
-	var hit_normal: Vector3 = mantle_probe_lower.get_collision_normal()
-	if absf(hit_normal.y) > mantle_wall_angle_limit:
+	# Main check: broad multi-direction, multi-height ledge finder.
+	# This is designed to trigger whenever the player is in reasonable contact
+	# with a ledge, including from angled approaches and ledges slightly above head.
+	if _find_ledge_target() == null:
 		return false
 
 	return true
 
 
-func _begin_mantle() -> void:
+# Improved forgiving ledge detection.
+# Uses a fan of forward directions (for angled approaches) and many heights
+# (to catch ledges at or slightly above head height). Prefers any reasonable
+# wall contact while airborne.
+func _find_ledge_target() -> Variant:
 	var forward := -global_transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
+	if forward.length() < 0.01:
+		return null
 
-	var hit_point := mantle_probe_lower.get_collision_point()
 	var space_state := get_world_3d().direct_space_state
-	var ray_from := hit_point + forward * mantle_forward_distance + Vector3.UP * (mantle_max_height + 0.2)
-	var ray_to := ray_from + Vector3.DOWN * (mantle_max_height + mantle_min_height + 2.0)
-	var query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
-	query.exclude = [self]
 
-	var hit := space_state.intersect_ray(query)
-	if hit.is_empty():
-		return
+	# Fan of directions to support angled approaches (not just perfectly straight-on).
+	var dirs: Array[Vector3] = [forward]
+	var side_angle := 0.45  # ~26 degrees left/right
+	dirs.append(forward.rotated(Vector3.UP, side_angle))
+	dirs.append(forward.rotated(Vector3.UP, -side_angle))
+	# A bit wider for very forgiving "any contact"
+	dirs.append(forward.rotated(Vector3.UP, side_angle * 1.6))
+	dirs.append(forward.rotated(Vector3.UP, -side_angle * 1.6))
 
-	var top_point: Vector3 = hit["position"]
-	var base_target := top_point + Vector3.UP * (standing_capsule_height * 0.5 + 0.05) + forward * 0.15
+	# Heights from low (waist) to above head. Higher values enable "slightly higher than head" ledges.
+	var test_heights: Array[float] = [0.5, 0.8, 1.1, 1.4, 1.7, 2.0, 2.3, 2.6]
+
+	var wall_hit := {}
+	for d in dirs:
+		for h in test_heights:
+			var from_pos := global_position + Vector3(0.0, h, 0.0)
+			var to_pos := from_pos + d * (mantle_forward_distance + 0.5)
+			var query := PhysicsRayQueryParameters3D.create(from_pos, to_pos)
+			query.exclude = [self]
+			var hit := space_state.intersect_ray(query)
+			if not hit.is_empty():
+				var normal: Vector3 = hit.get("normal", Vector3.UP)
+				if absf(normal.y) <= mantle_wall_angle_limit:
+					wall_hit = hit
+					break
+		if not wall_hit.is_empty():
+			break
+
+	if wall_hit.is_empty():
+		# Fallback: use the probe data if the broad search missed but probes have contact.
+		# This helps "any time in contact".
+		if mantle_probe_lower.is_colliding():
+			var n := mantle_probe_lower.get_collision_normal()
+			if absf(n.y) <= mantle_wall_angle_limit:
+				wall_hit = {
+					"position": mantle_probe_lower.get_collision_point(),
+					"normal": n
+				}
+
+	if wall_hit.is_empty():
+		return null
+
+	var hit_point: Vector3 = wall_hit["position"]
+
+	# Search for ledge top, starting quite high to support above-head reaches.
+	var search_up := mantle_max_height + 1.3
+	var ray_from := hit_point + forward * 0.25 + Vector3.UP * search_up
+	var ray_to := hit_point + forward * 0.25 - Vector3.UP * (search_up + 3.2)
+	var top_query := PhysicsRayQueryParameters3D.create(ray_from, ray_to)
+	top_query.exclude = [self]
+	var top_hit := space_state.intersect_ray(top_query)
+	if top_hit.is_empty():
+		return null
+
+	var top_point: Vector3 = top_hit["position"]
+
+	var base_target := top_point + Vector3.UP * (standing_capsule_height * 0.5 + 0.07) + forward * 0.1
 	var target := base_target
 
+	# Generous clearance search so it succeeds from many contact angles/positions.
 	if test_move(global_transform, target - global_position):
 		var found_clear_target := false
-		for i in range(1, 8):
-			var candidate := base_target - forward * (0.15 * float(i))
+		for i in range(1, 14):
+			var candidate := base_target - forward * (0.1 * float(i))
 			if not test_move(global_transform, candidate - global_position):
 				target = candidate
 				found_clear_target = true
 				break
 
 		if not found_clear_target:
-			for i in range(1, 4):
-				var candidate_up := base_target + Vector3.UP * (0.1 * float(i))
+			for i in range(1, 6):
+				var candidate_up := base_target + Vector3.UP * (0.08 * float(i))
 				if not test_move(global_transform, candidate_up - global_position):
 					target = candidate_up
 					found_clear_target = true
 					break
 
 		if not found_clear_target:
-			return
+			return null
+
+	return target
+
+
+func _begin_mantle() -> void:
+	var target = _find_ledge_target()
+	if target == null:
+		return
 
 	_state = PlayerLocomotionState.Value.MANTLING
 	velocity = Vector3.ZERO

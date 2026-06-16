@@ -46,11 +46,11 @@ script = ExtResource("3_kg584")
 
 [node name="MantleProbeLower" type="RayCast3D" parent="." unique_id=1201554607]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-target_position = Vector3(0, 0, -0.8)
+target_position = Vector3(0, 0, -1.5)
 
 [node name="MantleProbeUpper" type="RayCast3D" parent="." unique_id=721346614]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-target_position = Vector3(0, 0, -0.8)
+target_position = Vector3(0, 0, -1.5)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=688196857]
 
