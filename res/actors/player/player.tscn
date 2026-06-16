@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://djhg3lp50lxf3" path="res://res/actors/player/player_controller.gd" id="1_kkxib"]
 [ext_resource type="Script" uid="uid://wqar8egpsqmd" path="res://res/actors/player/player_camera_controller.gd" id="2_3qoh2"]
 [ext_resource type="Script" uid="uid://b35nhu11ofha4" path="res://res/actors/player/player_interaction_component.gd" id="3_kg584"]
+[ext_resource type="Script" uid="uid://djeqh0fvmm8ma" path="res://res/actors/player/weapon_anchor.gd" id="4_rjkmk"]
 [ext_resource type="Script" uid="uid://cn64xiu67ytti" path="res://res/actors/player/player_combat_bridge.gd" id="5_jmhdq"]
+[ext_resource type="PackedScene" path="res://res/actors/player/weapon_placeholder.tscn" id="5_xn2gg"]
 [ext_resource type="Resource" path="res://res/actors/player/player_movement_profile_default.tres" id="5_xsgd0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v2rf"]
@@ -16,8 +18,6 @@ roughness = 0.72
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x5jlt"]
 radius = 0.35
-
-[sub_resource type="BoxMesh" id="BoxMesh_aexle"]
 
 [node name="Player" type="CharacterBody3D" unique_id=579228476]
 floor_snap_length = 0.25
@@ -44,8 +44,17 @@ current = true
 
 [node name="UpperFP" type="Node3D" parent="HeadPivot/Camera3D/ViewModelRoot" unique_id=122128862]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HeadPivot/Camera3D/ViewModelRoot/UpperFP" unique_id=863693678]
-mesh = SubResource("BoxMesh_aexle")
+[node name="WeaponAnchor" type="Node3D" parent="HeadPivot/Camera3D/ViewModelRoot/UpperFP" unique_id=1856060142]
+editor_description = "Weapon positioning anchor (hip vs lowered/ADS).
+   Attach a weapon view model (or the placeholder) as a direct child.
+   Will be driven by CombatBridge readiness."
+script = ExtResource("4_rjkmk")
+hip_position = Vector3(0.08, -0.15, -0.35)
+ads_position = Vector3(0, -0.08, -0.42)
+ads_rotation_degrees = Vector3(-4, 0, 0)
+
+[node name="WeaponPlaceholder" parent="HeadPivot/Camera3D/ViewModelRoot/UpperFP/WeaponAnchor" unique_id=1828600232 instance=ExtResource("5_xn2gg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034396768, -0.08321679, -0.09846187)
 
 [node name="LowerFP" type="Node3D" parent="HeadPivot/Camera3D/ViewModelRoot" unique_id=2119956235]
 

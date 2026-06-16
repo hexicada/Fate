@@ -38,6 +38,7 @@ var slide_cooldown: float
 @onready var hint_label: Label = $UI/HintLabel
 @onready var interaction_label: Label = $UI/InteractionLabel
 @onready var combat_bridge: PlayerCombatBridge = $CombatBridge
+@onready var weapon_anchor: WeaponAnchor = $HeadPivot/Camera3D/ViewModelRoot/UpperFP/WeaponAnchor
 
 var _gravity := 9.8
 var _state := PlayerLocomotionState.Value.STANDING
@@ -122,6 +123,9 @@ func _physics_process(delta: float) -> void:
 		_update_mantle(delta)
 		camera_controller.update_state_effects(false, false, delta)
 		combat_bridge.update_from_locomotion_state(_state)
+		if weapon_anchor:
+			var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+			weapon_anchor.set_ads_enabled(lowered)
 		_update_debug_label()
 		return
 
@@ -150,6 +154,9 @@ func _physics_process(delta: float) -> void:
 		_begin_mantle()
 		camera_controller.update_state_effects(false, false, delta)
 		combat_bridge.update_from_locomotion_state(_state)
+		if weapon_anchor:
+			var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+			weapon_anchor.set_ads_enabled(lowered)
 		_update_debug_label()
 		return
 
@@ -168,6 +175,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_update_state(sprint_requested)
 	combat_bridge.update_from_locomotion_state(_state)
+	if weapon_anchor:
+		var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+		weapon_anchor.set_ads_enabled(lowered)
 	_update_debug_label()
 
 
@@ -324,6 +334,9 @@ func _end_slide() -> void:
 	_state = PlayerLocomotionState.Value.STANDING
 	_slide_time_left = 0.0
 	combat_bridge.update_from_locomotion_state(_state)
+	if weapon_anchor:
+		var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+		weapon_anchor.set_ads_enabled(lowered)
 
 
 func _can_start_mantle(move_input: Vector2, on_floor: bool) -> bool:
@@ -459,6 +472,9 @@ func _begin_mantle() -> void:
 	_mantle_start_position = global_position
 	_mantle_target_position = target
 	combat_bridge.update_from_locomotion_state(_state)
+	if weapon_anchor:
+		var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+		weapon_anchor.set_ads_enabled(lowered)
 
 
 func _update_mantle(delta: float) -> void:
@@ -472,6 +488,9 @@ func _update_mantle(delta: float) -> void:
 		global_position = _mantle_target_position
 		_state = PlayerLocomotionState.Value.STANDING
 		combat_bridge.update_from_locomotion_state(_state)
+		if weapon_anchor:
+			var lowered = combat_bridge.readiness != PlayerCombatBridge.WeaponReadiness.READY
+			weapon_anchor.set_ads_enabled(lowered)
 
 
 func _horizontal_speed() -> float:
